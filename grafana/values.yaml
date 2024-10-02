@@ -1,0 +1,17 @@
+adminUser: admin
+adminPassword: admin
+
+service:
+  type: NodePort
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server:80
+        access: proxy
+      - name: Loki
+        type: loki
+        url: http://loki:3100
