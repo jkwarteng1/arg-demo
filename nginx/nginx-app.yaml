@@ -1,20 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana
+  name: nginx
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://grafana.github.io/helm-charts
+    repoURL: https://github.com/jkwarteng1/arg-demo  # Path to your GitHub repo
+    path: nginx  # Directory where deployment.yaml is located
     targetRevision: main
-    chart: grafana
-    helm:
-      valueFiles:
-        - ../arg-demo/grafana/values.yaml  # Path to your custom values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring  # Ensure namespace is 'monitoring'
+    namespace: default  # NGINX can be in 'default' namespace
   syncPolicy:
     automated:
       prune: true

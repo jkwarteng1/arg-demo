@@ -1,9 +1,21 @@
-service:
-  type: NodePort
-loki:
-  commonConfig:
-    replication_factor: 1
-  resources:
-    requests:
-      memory: 512Mi
-      cpu: 500m
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: main
+    chart: loki-stack
+    helm:
+      valueFiles:
+        - ../arg-demo/loki/values.yaml  # Path to your custom values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring  # Ensure namespace is 'monitoring'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

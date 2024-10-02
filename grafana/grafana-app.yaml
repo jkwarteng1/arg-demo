@@ -11,10 +11,10 @@ spec:
     chart: grafana
     helm:
       valueFiles:
-        - ../arg-demo/grafana/values.yaml  # Path to your custom values.yaml
+        - ../arg-demo/grafana/values.yaml  # Relative path to your custom values.yaml
   destination:
-    server: https://kubernetes.default.svc
-    namespace: monitoring  # Ensure namespace is 'monitoring'
+    server: 'https://kubernetes.default.svc'
+    namespace: monitoring  # Deploying to monitoring namespace
   syncPolicy:
     automated:
       prune: true
