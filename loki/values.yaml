@@ -1,0 +1,9 @@
+service:
+  type: NodePort
+loki:
+  commonConfig:
+    replication_factor: 1
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 500m
